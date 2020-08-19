@@ -1,3 +1,6 @@
+//VPR Object
+var vrpObj = null;
+
 //Generates the code for the "Placa"
 function vrpCodeGen() {
     /*
@@ -76,4 +79,42 @@ function compareVPR(vrpTxt, min, max, timeTxt) {
         console.log("Puedes circular");
     }
     return timeStatus;
+}
+
+//Validates VPR syntax
+function validateVRPSyntax(vrp) {
+    //Gets VPR into an array
+    var vrpArray = [];
+    for (i = 0; i < vrp.length; i++) {
+        vrpArray.push(vrp.charAt(i));
+    }
+    var prefixStatus = 0;
+    //Checks if the first 3 chars are between 65-90 ascii uppercase letters
+    for (i = 0; i < 3; i++) {
+        if (vrpArray[i].charCodeAt(0) >= 65 && vrpArray[0].charCodeAt(0) <= 90) {
+            prefixStatus += 0;
+        } else {
+            prefixStatus += 1;
+        }
+    }
+    //Checks if the last chars are between 48-57 ascii numbers
+    var numberStatus = 0;
+    for (i = 3; i < vrp.length; i++) {
+        var num = parseInt(vrpArray[i].charCodeAt(0));
+        if (num >= 48 && num <= 57) {
+            numberStatus += 0;
+        } else {
+            numberStatus += 1;
+        }
+    }
+    var res = prefixStatus + numberStatus;
+    return res;
+
+}
+
+//Gets the last number in the vrp string.
+function substringVPR(vrp) {
+    var vrpLength = vrp.length;
+    var vrpLast = vrp.substring(vrpLength - 1);
+    return vrpLast;
 }
