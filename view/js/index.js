@@ -47,7 +47,7 @@ function validatePP() {
     var vrpTxt = document.getElementById("vrpInput").value;
     var dateTxt = new Date(document.getElementById("datepicker").value + "T00:00");
     var timeTxt = document.getElementById("timepicker").value;
-    
+
     var errorPlaca = document.getElementById("errorVRP");
     var errorDate = document.getElementById("errorDate");
     var errorTime = document.getElementById("errorTime");
@@ -59,7 +59,7 @@ function validatePP() {
             alert("Please check your VRP lenght");
 
         } else {
-            if (validateVRPSyntax(vrpTxt)>0) {
+            if (validateVRPSyntax(vrpTxt) > 0) {
                 alert("Please check your VRP syntax");
             } else {
                 var day = dateTxt.getDay();

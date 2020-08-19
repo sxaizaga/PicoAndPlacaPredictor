@@ -9,7 +9,6 @@
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -33,15 +32,16 @@
     </nav>
     <div class="container">
         <div class="row" style="padding-top: 5%;">
-            
             <div class="col-sm" style="padding: 3%;">
                 <div class="form-group">
-                    <label for="vrpInput">Enter your vehicule registration plate (VRP)<small id="vrpHelp" class="form-text text-muted">Example: PBH1234 or PBH123</small></label>
-                    <input type="text" onkeyup="this.value = this.value.toUpperCase();"  class="form-control" id="vrpInput" placeholder="XXX####" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your VRP with anyone else.</small>
+                    <label for="vrpInput">Enter your vehicule registration plate (VRP)<small id="vrpHelp"
+                            class="form-text text-muted">Example: PBH1234 or PBH123</small></label>
+                    <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control"
+                        id="vrpInput" placeholder="XXX####" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your VRP with anyone
+                        else.</small>
                 </div>
                 <div class="row">
-                    
                     <div class="col">
                         <div class="form-group">
                             <label for="datepicker">Enter a day</label>
@@ -60,14 +60,13 @@
             </div>
             <div class="col-sm" style="padding: 3%;">
                 <div class="card" style="height: 100%;">
-                    <img src="img/red_car.svg" id="imgStatus" style="padding-top:5% ; width: 30%; align-self: center;" class="card-img-top"
-                        id="imgPlaca">
-
+                    <img src="img/red_car.svg" id="imgStatus" style="padding-top:5% ; width: 30%; align-self: center;"
+                        class="card-img-top" id="imgPlaca">
                     <div class="card-body">
                         <hr>
                         <div>
                             <h4>Status: </h4>
-                            <p id="statusV"> </p>                            
+                            <p id="statusV"> </p>
                         </div>
                     </div>
                 </div>
