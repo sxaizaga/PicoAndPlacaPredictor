@@ -1,10 +1,10 @@
-//VPR Object
+//VPR object
 var vrpObj = null;
 
 //Generates the code for the "Placa"
 function vrpCodeGen() {
     /*
-    VPR possible letters
+    "Placa" possible letters
     Azua (A)             Bolívar (B)
     Cañar (U)            Cotopaxi (X)
     Chimborazo (H)       El Oro (O)
@@ -42,6 +42,82 @@ function generatePlaca() {
     vrpTxt.textContent = vrpObj.code + "" + vrpObj.number;
 }
 
+//Validates the VPR field on click;
+function validatePP() {
+    var vrpTxt = document.getElementById("vrpInput").value;
+    var dateTxt = new Date(document.getElementById("datepicker").value + "T00:00");
+    var timeTxt = document.getElementById("timepicker").value;
+    
+    var errorPlaca = document.getElementById("errorVRP");
+    var errorDate = document.getElementById("errorDate");
+    var errorTime = document.getElementById("errorTime");
+    var mainError = document.getElementById("mainError");
+    if (vrpTxt == "" || dateTxt == "" || timeTxt == "") {
+        alert("Fill in all the inputs");
+    } else {
+        if (vrpTxt.length > 7 || vrpTxt.length < 6) {
+            alert("Please check your VRP lenght");
+
+        } else {
+            if (validateVRPSyntax(vrpTxt)>0) {
+                alert("Please check your VRP syntax");
+            } else {
+                var day = dateTxt.getDay();
+                var statusVPR = null;
+
+                switch (day) {
+                    //Monday
+                    case 1:
+                        statusVPR = compareVPR(vrpTxt, 1, 2, timeTxt);
+                        break;
+                    //Tuesday
+                    case 2:
+                        statusVPR = compareVPR(vrpTxt, 3, 4, timeTxt);
+                        break;
+                    //Wednesday
+                    case 3:
+                        statusVPR = compareVPR(vrpTxt, 5, 6, timeTxt);
+                        break;
+                    //Thursday
+                    case 4:
+                        statusVPR = compareVPR(vrpTxt, 7, 8, timeTxt);
+                        break;
+                    //Friday
+                    case 5:
+                        statusVPR = compareVPR(vrpTxt, 9, 0, timeTxt);
+                        break;
+                    case 6:
+                        statusVPR = 0;
+                        break;
+                    case 0:
+                        statusVPR = 0;
+                        break;
+                }
+
+                var statusText = document.getElementById("statusV");
+                var imgStatus = document.getElementById("imgStatus");
+                if (statusVPR == 0) {
+                    statusText.textContent = "Let's drive!! :D";
+                    statusText.style.fontSize = "24px";
+                    statusText.style.fontWeight = "Bold";
+                    statusText.style.color = "#009900";
+                    imgStatus.setAttribute("src", "img/ok.png");
+                } else {
+                    statusText.textContent = "You shall not drive!!";
+                    statusText.style.fontSize = "24px";
+                    statusText.style.fontWeight = "Bold";
+                    statusText.style.color = "Red";
+                    imgStatus.setAttribute("src", "img/nok.png");
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
 //Validates time
 function validateTime(time) {
     var status = 0;
@@ -51,34 +127,6 @@ function validateTime(time) {
         status = 0;
     }
     return status;
-}
-
-//Compares the day with the VPR last number;
-function comparevrpDay(min, max, vrpLast) {
-    if (vrpLast == min || vrpLast == max) {
-        dayStatus = 1;
-    } else {
-        dayStatus = 0;
-    }
-    return dayStatus;
-}
-
-//Gives the statment of restriction
-function compareVPR(vrpTxt, min, max, timeTxt) {
-    var vrpLast = substringVPR(vrpTxt);
-    var dayStatus = comparevrpDay(min, max, vrpLast);
-    if (dayStatus == 1) {
-        var timeStatus = validateTime(timeTxt);
-        if (timeStatus == 0) {
-            console.log("Puedes circular");
-        } else {
-            console.log("No puedes circular");
-        }
-    } else {
-        timeStatus = 0;
-        console.log("Puedes circular");
-    }
-    return timeStatus;
 }
 
 //Validates VPR syntax
@@ -117,4 +165,32 @@ function substringVPR(vrp) {
     var vrpLength = vrp.length;
     var vrpLast = vrp.substring(vrpLength - 1);
     return vrpLast;
+}
+
+//Compares the day with the VPR last number;
+function comparevrpDay(min, max, vrpLast) {
+    if (vrpLast == min || vrpLast == max) {
+        dayStatus = 1;
+    } else {
+        dayStatus = 0;
+    }
+    return dayStatus;
+}
+
+//Gives the statment of restriction
+function compareVPR(vrpTxt, min, max, timeTxt) {
+    var vrpLast = substringVPR(vrpTxt);
+    var dayStatus = comparevrpDay(min, max, vrpLast);
+    if (dayStatus == 1) {
+        var timeStatus = validateTime(timeTxt);
+        if (timeStatus == 0) {
+            console.log("Puedes circular");
+        } else {
+            console.log("No puedes circular");
+        }
+    } else {
+        timeStatus = 0;
+        console.log("Puedes circular");
+    }
+    return timeStatus;
 }
