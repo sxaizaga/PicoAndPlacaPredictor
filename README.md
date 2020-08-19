@@ -1,3 +1,5 @@
 # Pico & Placa Predictor
-Are you on a hurry?
-Do you want to know if you can drive today?
+Are you on a hurry?.
+Do you want to know if you can drive today?.
+
+Check the Pico & Placa Predictor!. :D
