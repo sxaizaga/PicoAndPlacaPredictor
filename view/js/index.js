@@ -38,3 +38,42 @@ function generatePlaca() {
     vrpTxt.setAttribute("value", vrpObj.code + "" + vrpObj.number);
     vrpTxt.textContent = vrpObj.code + "" + vrpObj.number;
 }
+
+//Validates time
+function validateTime(time) {
+    var status = 0;
+    if ((time >= "07:00" && time <= "09:30") || (time >= "16:00" && time <= "19:30")) {
+        status = 1;
+    } else {
+        status = 0;
+    }
+    return status;
+}
+
+//Compares the day with the VPR last number;
+function comparevrpDay(min, max, vrpLast) {
+    if (vrpLast == min || vrpLast == max) {
+        dayStatus = 1;
+    } else {
+        dayStatus = 0;
+    }
+    return dayStatus;
+}
+
+//Gives the statment of restriction
+function compareVPR(vrpTxt, min, max, timeTxt) {
+    var vrpLast = substringVPR(vrpTxt);
+    var dayStatus = comparevrpDay(min, max, vrpLast);
+    if (dayStatus == 1) {
+        var timeStatus = validateTime(timeTxt);
+        if (timeStatus == 0) {
+            console.log("Puedes circular");
+        } else {
+            console.log("No puedes circular");
+        }
+    } else {
+        timeStatus = 0;
+        console.log("Puedes circular");
+    }
+    return timeStatus;
+}
